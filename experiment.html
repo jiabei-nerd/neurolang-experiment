@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Phosphene Pattern Learning Experiment</title>
+    <meta charset="utf-8">
+    <title>磷光点模式学习实验</title>
     <script src="https://unpkg.com/jspsych@7.3.4"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3"></script>
@@ -10,7 +11,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
     <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet">
     <style>
-        body { background-color: #333; }
+        body { background-color: #333; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
         .jspsych-content { max-width: 800px; }
         .stimulus-img {
             width: 200px; height: 200px;
@@ -27,33 +28,26 @@
         }
         .progress-fill { height: 100%; background: #3498db; border-radius: 4px; }
         .jspsych-btn {
-            min-width: 100px; margin: 3px;
+            min-width: 80px; margin: 3px;
             font-size: 14px; padding: 8px 12px;
         }
         .instructions {
             color: #ecf0f1; text-align: left; max-width: 650px;
-            margin: 0 auto; line-height: 1.6;
+            margin: 0 auto; line-height: 1.8;
         }
         .instructions h2 { text-align: center; }
     </style>
 </head>
 <body>
 <script>
-// ============================================================
-// Configuration
-// ============================================================
-
-// Condition is assigned via URL parameter: ?condition=symbol or ?condition=pixel
 const urlParams = new URLSearchParams(window.location.search);
 const CONDITION = urlParams.get('condition') || 'symbol';
 const PARTICIPANT_ID = urlParams.get('pid') || ('P' + Date.now());
-
-// *** DATA ENDPOINT — set to your server URL, or leave empty for CSV-only mode ***
 const GOOGLE_SCRIPT_URL = '';
 
 const CLASS_NAMES = [
-    'Clear Path', 'Obstacle', 'Person Left', 'Person Right',
-    'Vehicle Ahead', 'Vehicle Side', 'Crosswalk', 'Bicycle'
+    '道路畅通', '前方障碍', '左侧有人', '右侧有人',
+    '正前方车辆', '侧方车辆', '人行横道', '自行车'
 ];
 const N_CLASSES = CLASS_NAMES.length;
 const N_LEARNING_TRIALS = 200;
@@ -61,10 +55,6 @@ const N_TEST_TRIALS = 50;
 const SAMPLES_PER_CLASS = 25;
 const FEEDBACK_DURATION = 1500;
 const ITI_DURATION = 500;
-
-// ============================================================
-// Build stimulus list
-// ============================================================
 
 function buildStimulusList(nTrials) {
     let list = [];
@@ -77,7 +67,6 @@ function buildStimulusList(nTrials) {
             correct_name: CLASS_NAMES[cls],
         });
     }
-    // Shuffle
     for (let i = list.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [list[i], list[j]] = [list[j], list[i]];
@@ -87,23 +76,14 @@ function buildStimulusList(nTrials) {
 
 const learningStimuli = buildStimulusList(N_LEARNING_TRIALS);
 const testStimuli = buildStimulusList(N_TEST_TRIALS);
-
-// Collect all image paths for preloading
 const allImages = [...new Set([...learningStimuli, ...testStimuli].map(s => s.stimulus))];
-
-// ============================================================
-// jsPsych setup
-// ============================================================
 
 const jsPsych = initJsPsych({
     on_finish: function() {
-        // Collect trial data
         const responseData = jsPsych.data.get().filter({task: 'response'}).values();
         const surveyData = jsPsych.data.get().filter({task: 'survey'}).values();
-
         const payload = {
-            participant: PARTICIPANT_ID,
-            condition: CONDITION,
+            participant: PARTICIPANT_ID, condition: CONDITION,
             trials: responseData.map(t => ({
                 phase: t.phase, trial_num: t.trial_num,
                 correct_class: t.correct_class, correct_name: t.correct_name,
@@ -112,319 +92,240 @@ const jsPsych = initJsPsych({
             survey: surveyData.length > 0 ? surveyData[0].response : null,
         };
 
-        // Show uploading status
         jsPsych.getDisplayElement().innerHTML = `
             <div style="color: #ecf0f1; text-align: center; padding: 50px;">
-                <h2>Uploading data...</h2>
-                <p id="upload-status">Please wait.</p>
+                <h2>正在保存数据...</h2>
+                <p id="upload-status">请稍候</p>
             </div>`;
-
-        // Auto-submit to Google Apps Script
         const statusEl = document.getElementById('upload-status');
 
         if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('YOUR_')) {
             fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
+                method: 'POST', mode: 'no-cors',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(payload),
             })
             .then(() => {
-                statusEl.innerHTML = `
-                    <span style="color:#2ecc71; font-size:24px;">&#10004; Data submitted successfully!</span>
-                    <br><br>Thank you for your participation!
-                    <br><span style="color:#888;">ID: ${PARTICIPANT_ID} | Condition: ${CONDITION}</span>`;
+                statusEl.innerHTML = `<span style="color:#2ecc71; font-size:24px;">&#10004; 数据已提交！</span>
+                    <br><br>感谢你的参与！<br><span style="color:#888;">编号: ${PARTICIPANT_ID}</span>`;
             })
-            .catch(err => {
-                statusEl.innerHTML = `
-                    <span style="color:#e74c3c;">Upload failed. Downloading backup CSV...</span>
-                    <br><br><span style="color:#888;">${err}</span>`;
-                downloadCSV();
-            });
+            .catch(() => { downloadCSV(); });
         } else {
-            statusEl.innerHTML = 'No server configured. Downloading CSV...';
             downloadCSV();
         }
 
-        // Always also download a local backup CSV
         function downloadCSV() {
             const csv = jsPsych.data.get().filter({task: 'response'}).csv();
             const blob = new Blob([csv], {type: 'text/csv'});
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = `neurolang_${CONDITION}_${PARTICIPANT_ID}.csv`;
-            a.click();
+            a.href = url; a.download = `neurolang_${CONDITION}_${PARTICIPANT_ID}.csv`; a.click();
+            statusEl.innerHTML = `<span style="color:#2ecc71; font-size:24px;">&#10004; 实验完成！</span>
+                <br><br>数据已自动下载为 CSV 文件。<br><strong>请把下载的文件发给研究者。</strong>
+                <br><br><span style="color:#888;">编号: ${PARTICIPANT_ID} | 条件: ${CONDITION}</span>`;
         }
     }
 });
 
-// ============================================================
-// Timeline
-// ============================================================
-
 let timeline = [];
 
-// Preload images
+// 预加载
 timeline.push({
-    type: jsPsychPreload,
-    images: allImages,
-    show_progress_bar: true,
-    message: '<p style="color:#ecf0f1">Loading experiment stimuli...</p>',
+    type: jsPsychPreload, images: allImages, show_progress_bar: true,
+    message: '<p style="color:#ecf0f1">正在加载实验素材...</p>',
 });
 
-// Consent
+// 知情同意
 timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
         <div class="instructions">
-            <h2>Informed Consent</h2>
-            <p><strong>Study:</strong> Learning Phosphene Patterns for Visual Prosthesis</p>
-            <p><strong>Duration:</strong> Approximately 25-30 minutes</p>
-            <p><strong>What you will do:</strong> You will see patterns of bright dots on a dark
-            background (simulating what a visual prosthesis user sees). Your task is to learn
-            which pattern corresponds to which real-world scene category.</p>
-            <p><strong>Risks:</strong> None beyond normal computer use. You may experience mild
-            eye fatigue. Take breaks if needed.</p>
-            <p><strong>Data:</strong> Your responses are anonymous. Only response accuracy and
-            reaction times are recorded. No personal information is collected.</p>
-            <p><strong>Voluntary:</strong> You may stop at any time by closing this page.</p>
-            <p>By clicking "I Agree", you confirm that you are 18+ years old, have normal or
-            corrected-to-normal vision, and consent to participate.</p>
+            <h2>知情同意书</h2>
+            <p><strong>实验名称：</strong>视觉假体磷光点模式学习实验</p>
+            <p><strong>时间：</strong>约 25-30 分钟</p>
+            <p><strong>内容：</strong>你将看到一些由亮点组成的图案（模拟视觉假体用户看到的画面），
+            你的任务是学习每个图案对应的场景类别。</p>
+            <p><strong>风险：</strong>无特殊风险，可能会有轻微视觉疲劳，可随时休息。</p>
+            <p><strong>数据：</strong>所有数据匿名处理，仅记录正确率和反应时间，不收集个人信息。</p>
+            <p><strong>自愿：</strong>你可以随时关闭页面退出实验。</p>
+            <p>点击"我同意"表示你已年满 18 岁、视力正常（或矫正后正常），并同意参加本实验。</p>
         </div>`,
-    choices: ['I Agree'],
+    choices: ['我同意'],
 });
 
-// Instructions
+// 指导语
 timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `
         <div class="instructions">
-            <h2>Instructions</h2>
-            <p>In this experiment, you will learn a <strong>"phosphene language"</strong>.</p>
-            <p>Visual prostheses stimulate the brain with small flashes of light called
-            <strong>phosphenes</strong>. These appear as patterns of bright dots on a dark background.</p>
-            <p>Each pattern represents one of <strong>${N_CLASSES} scene categories</strong>:</p>
-            <p style="text-align:center; font-size: 16px;">
-                ${CLASS_NAMES.map((n, i) => `<strong>${i+1}.</strong> ${n}`).join(' &nbsp;|&nbsp; ')}
+            <h2>实验说明</h2>
+            <p>想象你是一位使用<strong>视觉假体</strong>的患者。假体通过电极刺激大脑，
+            让你看到一些<strong>亮点图案</strong>（叫做"磷光点"）。</p>
+            <p>每个亮点图案代表一个<strong>真实场景</strong>，一共有 <strong>${N_CLASSES} 种场景</strong>：</p>
+            <p style="text-align:center; font-size: 16px; line-height: 2;">
+                ${CLASS_NAMES.map((n, i) => `<strong>${i+1}.</strong> ${n}`).join(' &nbsp;&nbsp; ')}
             </p>
-            <p>On each trial:</p>
+            <p>每次实验：</p>
             <ol>
-                <li>A phosphene pattern will appear on screen</li>
-                <li>Click the button matching the scene you think it represents</li>
-                <li>You will receive feedback (correct/incorrect + the right answer)</li>
+                <li>屏幕上出现一个亮点图案</li>
+                <li>你从下面的按钮中选择你认为它代表的场景</li>
+                <li>系统会告诉你对不对，以及正确答案是什么</li>
             </ol>
-            <p>At first you will be guessing — that's expected! Over time, you will learn to
-            recognize the patterns. Try your best to learn as quickly as possible.</p>
-            <p>There are <strong>${N_LEARNING_TRIALS} learning trials</strong> (with feedback)
-            followed by <strong>${N_TEST_TRIALS} test trials</strong> (without feedback).</p>
+            <p><strong>一开始你会完全靠猜——这是正常的！</strong>通过反馈，你会慢慢学会辨认这些图案。
+            请尽力记住每种图案的特征。</p>
+            <p>共 <strong>${N_LEARNING_TRIALS} 次学习</strong>（有反馈）+ <strong>${N_TEST_TRIALS} 次测试</strong>（无反馈）。</p>
         </div>`,
-    choices: ['Start Experiment'],
+    choices: ['开始实验'],
 });
 
-// Practice trials (5 trials)
+// 练习
 timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="instructions">
-        <h2>Practice Round</h2>
-        <p>Let's start with 5 practice trials to get familiar with the interface.</p>
+        <h2>练习环节</h2>
+        <p>先来 5 次练习，熟悉一下操作。</p>
     </div>`,
-    choices: ['Begin Practice'],
+    choices: ['开始练习'],
 });
 
 for (let i = 0; i < 5; i++) {
     let stim = learningStimuli[i];
-
     timeline.push({
         type: jsPsychImageButtonResponse,
-        stimulus: stim.stimulus,
-        stimulus_width: 200,
-        stimulus_height: 200,
+        stimulus: stim.stimulus, stimulus_width: 200, stimulus_height: 200,
         choices: CLASS_NAMES,
-        prompt: `<div class="trial-counter">Practice ${i+1}/5</div>`,
+        prompt: `<div class="trial-counter">练习 ${i+1}/5</div>`,
         data: { task: 'practice', correct_class: stim.correct_class, condition: CONDITION },
-        css_classes: ['stimulus-img'],
-        on_finish: function(data) {
-            data.correct = parseInt(data.response) === data.correct_class;
-        }
+        on_finish: function(data) { data.correct = parseInt(data.response) === data.correct_class; }
     });
-
     timeline.push({
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function() {
             let last = jsPsych.data.get().last(1).values()[0];
-            let correct = last.correct;
-            let correctName = CLASS_NAMES[last.correct_class];
-            if (correct) {
-                return `<div class="feedback-correct">&#10004; Correct!</div>
-                        <div class="feedback-answer">It was: ${correctName}</div>`;
-            } else {
-                return `<div class="feedback-incorrect">&#10008; Incorrect</div>
-                        <div class="feedback-answer">Correct answer: ${correctName}</div>`;
-            }
+            let name = CLASS_NAMES[last.correct_class];
+            return last.correct
+                ? `<div class="feedback-correct">&#10004; 正确！</div><div class="feedback-answer">${name}</div>`
+                : `<div class="feedback-incorrect">&#10008; 不对</div><div class="feedback-answer">正确答案：${name}</div>`;
         },
-        choices: 'NO_KEYS',
-        trial_duration: FEEDBACK_DURATION,
+        choices: 'NO_KEYS', trial_duration: FEEDBACK_DURATION,
     });
 }
 
-// Start learning phase
+// 正式学习
 timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="instructions">
-        <h2>Learning Phase</h2>
-        <p>Now the real experiment begins. You will see ${N_LEARNING_TRIALS} phosphene patterns.</p>
-        <p>Try to learn which pattern goes with which category.</p>
-        <p>You will receive feedback after each response.</p>
+        <h2>正式学习</h2>
+        <p>接下来是 ${N_LEARNING_TRIALS} 次正式学习，每次都有反馈。</p>
+        <p>尽力记住每种图案对应的场景！</p>
     </div>`,
-    choices: ['Begin Learning'],
+    choices: ['开始'],
 });
 
-// Learning trials
 for (let i = 0; i < N_LEARNING_TRIALS; i++) {
     let stim = learningStimuli[i];
-    let progress = ((i + 1) / N_LEARNING_TRIALS * 100).toFixed(0);
+    let pct = ((i+1) / N_LEARNING_TRIALS * 100).toFixed(0);
 
     timeline.push({
         type: jsPsychImageButtonResponse,
-        stimulus: stim.stimulus,
-        stimulus_width: 200,
-        stimulus_height: 200,
+        stimulus: stim.stimulus, stimulus_width: 200, stimulus_height: 200,
         choices: CLASS_NAMES,
-        prompt: `<div class="trial-counter">Learning: Trial ${i+1}/${N_LEARNING_TRIALS}</div>
-                 <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`,
+        prompt: `<div class="trial-counter">学习：第 ${i+1}/${N_LEARNING_TRIALS} 次</div>
+                 <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`,
         data: {
-            task: 'response',
-            phase: 'learning',
-            trial_num: i + 1,
-            correct_class: stim.correct_class,
-            correct_name: stim.correct_name,
-            condition: CONDITION,
-            participant: PARTICIPANT_ID,
+            task: 'response', phase: 'learning', trial_num: i+1,
+            correct_class: stim.correct_class, correct_name: stim.correct_name,
+            condition: CONDITION, participant: PARTICIPANT_ID,
         },
-        on_finish: function(data) {
-            data.correct = parseInt(data.response) === data.correct_class;
-        }
+        on_finish: function(data) { data.correct = parseInt(data.response) === data.correct_class; }
     });
 
-    // Feedback
     timeline.push({
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function() {
             let last = jsPsych.data.get().last(1).values()[0];
-            let correct = last.correct;
-            let correctName = CLASS_NAMES[last.correct_class];
-            if (correct) {
-                return `<div class="feedback-correct">&#10004; Correct!</div>
-                        <div class="feedback-answer">${correctName}</div>`;
-            } else {
-                return `<div class="feedback-incorrect">&#10008; Incorrect</div>
-                        <div class="feedback-answer">Answer: ${correctName}</div>`;
-            }
+            let name = CLASS_NAMES[last.correct_class];
+            return last.correct
+                ? `<div class="feedback-correct">&#10004; 正确！</div><div class="feedback-answer">${name}</div>`
+                : `<div class="feedback-incorrect">&#10008; 不对</div><div class="feedback-answer">正确答案：${name}</div>`;
         },
-        choices: 'NO_KEYS',
-        trial_duration: FEEDBACK_DURATION,
+        choices: 'NO_KEYS', trial_duration: FEEDBACK_DURATION,
     });
 
-    // ITI
     timeline.push({
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<div style="font-size:30px;color:#ecf0f1">+</div>',
-        choices: 'NO_KEYS',
-        trial_duration: ITI_DURATION,
+        choices: 'NO_KEYS', trial_duration: ITI_DURATION,
     });
 
-    // Break every 50 trials
-    if ((i + 1) % 50 === 0 && i + 1 < N_LEARNING_TRIALS) {
-        let blockAcc = jsPsych.data.get().filter({task: 'response', phase: 'learning'}).last(50);
+    if ((i+1) % 50 === 0 && i+1 < N_LEARNING_TRIALS) {
         timeline.push({
             type: jsPsychHtmlButtonResponse,
             stimulus: function() {
-                let recent = jsPsych.data.get().filter({task: 'response', phase: 'learning'}).last(50);
-                let acc = (recent.filter({correct: true}).count() / 50 * 100).toFixed(0);
+                let recent = jsPsych.data.get().filter({task:'response', phase:'learning'}).last(50);
+                let acc = (recent.filter({correct:true}).count() / 50 * 100).toFixed(0);
                 return `<div class="instructions">
-                    <h2>Break</h2>
-                    <p>You've completed ${i+1}/${N_LEARNING_TRIALS} learning trials.</p>
-                    <p>Your accuracy in the last 50 trials: <strong>${acc}%</strong></p>
-                    <p>Take a short rest if needed, then continue.</p>
+                    <h2>休息一下</h2>
+                    <p>已完成 ${i+1}/${N_LEARNING_TRIALS} 次。</p>
+                    <p>最近 50 次准确率：<strong>${acc}%</strong></p>
+                    <p>休息好了就继续。</p>
                 </div>`;
             },
-            choices: ['Continue'],
+            choices: ['继续'],
         });
     }
 }
 
-// Test phase instructions
+// 测试阶段
 timeline.push({
     type: jsPsychHtmlButtonResponse,
     stimulus: `<div class="instructions">
-        <h2>Test Phase</h2>
-        <p>Well done! Now let's test what you've learned.</p>
-        <p>You will see <strong>${N_TEST_TRIALS} more patterns</strong>, but this time
-        <strong>without feedback</strong>.</p>
-        <p>Just do your best based on what you learned.</p>
+        <h2>测试阶段</h2>
+        <p>学习阶段结束了！</p>
+        <p>接下来 <strong>${N_TEST_TRIALS} 次测试</strong>，这次<strong>没有反馈</strong>。</p>
+        <p>根据你学到的知识，尽力作答。</p>
     </div>`,
-    choices: ['Begin Test'],
+    choices: ['开始测试'],
 });
 
-// Test trials (no feedback)
 for (let i = 0; i < N_TEST_TRIALS; i++) {
     let stim = testStimuli[i];
-
     timeline.push({
         type: jsPsychImageButtonResponse,
-        stimulus: stim.stimulus,
-        stimulus_width: 200,
-        stimulus_height: 200,
+        stimulus: stim.stimulus, stimulus_width: 200, stimulus_height: 200,
         choices: CLASS_NAMES,
-        prompt: `<div class="trial-counter">Test: ${i+1}/${N_TEST_TRIALS}</div>`,
+        prompt: `<div class="trial-counter">测试：第 ${i+1}/${N_TEST_TRIALS} 次</div>`,
         data: {
-            task: 'response',
-            phase: 'test',
-            trial_num: i + 1,
-            correct_class: stim.correct_class,
-            correct_name: stim.correct_name,
-            condition: CONDITION,
-            participant: PARTICIPANT_ID,
+            task: 'response', phase: 'test', trial_num: i+1,
+            correct_class: stim.correct_class, correct_name: stim.correct_name,
+            condition: CONDITION, participant: PARTICIPANT_ID,
         },
-        on_finish: function(data) {
-            data.correct = parseInt(data.response) === data.correct_class;
-        }
+        on_finish: function(data) { data.correct = parseInt(data.response) === data.correct_class; }
     });
-
-    // ITI only (no feedback)
     timeline.push({
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<div style="font-size:30px;color:#ecf0f1">+</div>',
-        choices: 'NO_KEYS',
-        trial_duration: ITI_DURATION,
+        choices: 'NO_KEYS', trial_duration: ITI_DURATION,
     });
 }
 
-// Subjective rating
+// 问卷
 timeline.push({
     type: jsPsychSurveyLikert,
     questions: [
-        {
-            prompt: 'How difficult was it to learn the phosphene patterns?',
-            labels: ['Very Easy', 'Easy', 'Moderate', 'Difficult', 'Very Difficult'],
-            required: true, name: 'difficulty'
-        },
-        {
-            prompt: 'How confident are you in your test phase answers?',
-            labels: ['Not at all', 'Slightly', 'Moderately', 'Very', 'Extremely'],
-            required: true, name: 'confidence'
-        },
-        {
-            prompt: 'Did you notice any strategy that helped you learn?',
-            labels: ['No strategy', 'Somewhat', 'Yes, clear strategy'],
-            required: true, name: 'strategy'
-        }
+        { prompt: '你觉得学习这些图案的难度如何？',
+          labels: ['非常容易', '容易', '一般', '困难', '非常困难'],
+          required: true, name: 'difficulty' },
+        { prompt: '你对测试阶段的回答有多大信心？',
+          labels: ['完全没信心', '不太有', '一般', '比较有', '非常有'],
+          required: true, name: 'confidence' },
+        { prompt: '你有没有发现什么记忆策略？',
+          labels: ['没有', '有一点', '有明确的策略'],
+          required: true, name: 'strategy' },
     ],
     data: { task: 'survey', condition: CONDITION, participant: PARTICIPANT_ID },
 });
 
-// Run
 jsPsych.run(timeline);
 </script>
 </body>
