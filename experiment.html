@@ -161,7 +161,10 @@ timeline.push({
             <h2>实验说明</h2>
             <p>想象你是一位使用<strong>视觉假体</strong>的患者。假体通过电极刺激大脑，
             让你看到一些<strong>亮点图案</strong>（叫做"磷光点"）。</p>
-            <p>每个亮点图案代表一个<strong>真实场景</strong>，一共有 <strong>${N_CLASSES} 种场景</strong>：</p>
+            <p><strong style="color:#e74c3c;">重要：这些图案和真实场景之间没有视觉上的相似性！</strong></p>
+            <p>它们是<strong>抽象的符号</strong>，就像盲文的点和字母没有关系一样。
+            你需要通过反复练习和反馈，把每种图案和对应的场景<strong>死记硬背</strong>下来。</p>
+            <p>一共有 <strong>${N_CLASSES} 种场景</strong>：</p>
             <p style="text-align:center; font-size: 16px; line-height: 2;">
                 ${CLASS_NAMES.map((n, i) => `<strong>${i+1}.</strong> ${n}`).join(' &nbsp;&nbsp; ')}
             </p>
@@ -171,8 +174,9 @@ timeline.push({
                 <li>你从下面的按钮中选择你认为它代表的场景</li>
                 <li>系统会告诉你对不对，以及正确答案是什么</li>
             </ol>
-            <p><strong>一开始你会完全靠猜——这是正常的！</strong>通过反馈，你会慢慢学会辨认这些图案。
-            请尽力记住每种图案的特征。</p>
+            <p><strong>一开始你会完全靠猜——这是正常的！</strong>
+            注意观察每种图案的特征：亮点的数量、位置、密集程度。
+            通过反馈，你会慢慢学会辨认。</p>
             <p>共 <strong>${N_LEARNING_TRIALS} 次学习</strong>（有反馈）+ <strong>${N_TEST_TRIALS} 次测试</strong>（无反馈）。</p>
         </div>`,
     choices: ['开始实验'],
