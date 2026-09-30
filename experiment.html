@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phosphene Pattern Learning Experiment</title>
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+    <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet">
+    <style>
+        body { background-color: #333; }
+        .jspsych-content { max-width: 800px; }
+        .stimulus-img {
+            width: 200px; height: 200px;
+            border: 2px solid #555; border-radius: 4px;
+            image-rendering: pixelated;
+        }
+        .feedback-correct { color: #2ecc71; font-size: 28px; font-weight: bold; }
+        .feedback-incorrect { color: #e74c3c; font-size: 28px; font-weight: bold; }
+        .feedback-answer { color: #ecf0f1; font-size: 20px; margin-top: 10px; }
+        .trial-counter { color: #888; font-size: 14px; margin-bottom: 10px; }
+        .progress-bar {
+            width: 300px; height: 8px; background: #555;
+            border-radius: 4px; margin: 0 auto 15px;
+        }
+        .progress-fill { height: 100%; background: #3498db; border-radius: 4px; }
+        .jspsych-btn {
+            min-width: 100px; margin: 3px;
+            font-size: 14px; padding: 8px 12px;
+        }
+        .instructions {
+            color: #ecf0f1; text-align: left; max-width: 650px;
+            margin: 0 auto; line-height: 1.6;
+        }
+        .instructions h2 { text-align: center; }
+    </style>
+</head>
+<body>
+<script>
+// ============================================================
+// Configuration
+// ============================================================
+
+// Condition is assigned via URL parameter: ?condition=symbol or ?condition=pixel
+const urlParams = new URLSearchParams(window.location.search);
+const CONDITION = urlParams.get('condition') || 'symbol';
+const PARTICIPANT_ID = urlParams.get('pid') || ('P' + Date.now());
+
+// *** DATA ENDPOINT — set to your server URL, or leave empty for CSV-only mode ***
+const GOOGLE_SCRIPT_URL = '';
+
+const CLASS_NAMES = [
+    'Clear Path', 'Obstacle', 'Person Left', 'Person Right',
+    'Vehicle Ahead', 'Vehicle Side', 'Crosswalk', 'Bicycle'
+];
+const N_CLASSES = CLASS_NAMES.length;
+const N_LEARNING_TRIALS = 200;
+const N_TEST_TRIALS = 50;
+const SAMPLES_PER_CLASS = 25;
+const FEEDBACK_DURATION = 1500;
+const ITI_DURATION = 500;
+
+// ============================================================
+// Build stimulus list
+// ============================================================
+
+function buildStimulusList(nTrials) {
+    let list = [];
+    for (let i = 0; i < nTrials; i++) {
+        let cls = i % N_CLASSES;
+        let sample = Math.floor(Math.random() * SAMPLES_PER_CLASS);
+        list.push({
+            stimulus: `stimuli/${CONDITION}/class${cls}_sample${sample}.png`,
+            correct_class: cls,
+            correct_name: CLASS_NAMES[cls],
+        });
+    }
+    // Shuffle
+    for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list;
+}
+
+const learningStimuli = buildStimulusList(N_LEARNING_TRIALS);
+const testStimuli = buildStimulusList(N_TEST_TRIALS);
+
+// Collect all image paths for preloading
+const allImages = [...new Set([...learningStimuli, ...testStimuli].map(s => s.stimulus))];
+
+// ============================================================
+// jsPsych setup
+// ============================================================
+
+const jsPsych = initJsPsych({
+    on_finish: function() {
+        // Collect trial data
+        const responseData = jsPsych.data.get().filter({task: 'response'}).values();
+        const surveyData = jsPsych.data.get().filter({task: 'survey'}).values();
+
+        const payload = {
+            participant: PARTICIPANT_ID,
+            condition: CONDITION,
+            trials: responseData.map(t => ({
+                phase: t.phase, trial_num: t.trial_num,
+                correct_class: t.correct_class, correct_name: t.correct_name,
+                response: t.response, correct: t.correct, rt: t.rt
+            })),
+            survey: surveyData.length > 0 ? surveyData[0].response : null,
+        };
+
+        // Show uploading status
+        jsPsych.getDisplayElement().innerHTML = `
+            <div style="color: #ecf0f1; text-align: center; padding: 50px;">
+                <h2>Uploading data...</h2>
+                <p id="upload-status">Please wait.</p>
+            </div>`;
+
+        // Auto-submit to Google Apps Script
+        const statusEl = document.getElementById('upload-status');
+
+        if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('YOUR_')) {
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload),
+            })
+            .then(() => {
+                statusEl.innerHTML = `
+                    <span style="color:#2ecc71; font-size:24px;">&#10004; Data submitted successfully!</span>
+                    <br><br>Thank you for your participation!
+                    <br><span style="color:#888;">ID: ${PARTICIPANT_ID} | Condition: ${CONDITION}</span>`;
+            })
+            .catch(err => {
+                statusEl.innerHTML = `
+                    <span style="color:#e74c3c;">Upload failed. Downloading backup CSV...</span>
+                    <br><br><span style="color:#888;">${err}</span>`;
+                downloadCSV();
+            });
+        } else {
+            statusEl.innerHTML = 'No server configured. Downloading CSV...';
+            downloadCSV();
+        }
+
+        // Always also download a local backup CSV
+        function downloadCSV() {
+            const csv = jsPsych.data.get().filter({task: 'response'}).csv();
+            const blob = new Blob([csv], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `neurolang_${CONDITION}_${PARTICIPANT_ID}.csv`;
+            a.click();
+        }
+    }
+});
+
+// ============================================================
+// Timeline
+// ============================================================
+
+let timeline = [];
+
+// Preload images
+timeline.push({
+    type: jsPsychPreload,
+    images: allImages,
+    show_progress_bar: true,
+    message: '<p style="color:#ecf0f1">Loading experiment stimuli...</p>',
+});
+
+// Consent
+timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+        <div class="instructions">
+            <h2>Informed Consent</h2>
+            <p><strong>Study:</strong> Learning Phosphene Patterns for Visual Prosthesis</p>
+            <p><strong>Duration:</strong> Approximately 25-30 minutes</p>
+            <p><strong>What you will do:</strong> You will see patterns of bright dots on a dark
+            background (simulating what a visual prosthesis user sees). Your task is to learn
+            which pattern corresponds to which real-world scene category.</p>
+            <p><strong>Risks:</strong> None beyond normal computer use. You may experience mild
+            eye fatigue. Take breaks if needed.</p>
+            <p><strong>Data:</strong> Your responses are anonymous. Only response accuracy and
+            reaction times are recorded. No personal information is collected.</p>
+            <p><strong>Voluntary:</strong> You may stop at any time by closing this page.</p>
+            <p>By clicking "I Agree", you confirm that you are 18+ years old, have normal or
+            corrected-to-normal vision, and consent to participate.</p>
+        </div>`,
+    choices: ['I Agree'],
+});
+
+// Instructions
+timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p>In this experiment, you will learn a <strong>"phosphene language"</strong>.</p>
+            <p>Visual prostheses stimulate the brain with small flashes of light called
+            <strong>phosphenes</strong>. These appear as patterns of bright dots on a dark background.</p>
+            <p>Each pattern represents one of <strong>${N_CLASSES} scene categories</strong>:</p>
+            <p style="text-align:center; font-size: 16px;">
+                ${CLASS_NAMES.map((n, i) => `<strong>${i+1}.</strong> ${n}`).join(' &nbsp;|&nbsp; ')}
+            </p>
+            <p>On each trial:</p>
+            <ol>
+                <li>A phosphene pattern will appear on screen</li>
+                <li>Click the button matching the scene you think it represents</li>
+                <li>You will receive feedback (correct/incorrect + the right answer)</li>
+            </ol>
+            <p>At first you will be guessing — that's expected! Over time, you will learn to
+            recognize the patterns. Try your best to learn as quickly as possible.</p>
+            <p>There are <strong>${N_LEARNING_TRIALS} learning trials</strong> (with feedback)
+            followed by <strong>${N_TEST_TRIALS} test trials</strong> (without feedback).</p>
+        </div>`,
+    choices: ['Start Experiment'],
+});
+
+// Practice trials (5 trials)
+timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="instructions">
+        <h2>Practice Round</h2>
+        <p>Let's start with 5 practice trials to get familiar with the interface.</p>
+    </div>`,
+    choices: ['Begin Practice'],
+});
+
+for (let i = 0; i < 5; i++) {
+    let stim = learningStimuli[i];
+
+    timeline.push({
+        type: jsPsychImageButtonResponse,
+        stimulus: stim.stimulus,
+        stimulus_width: 200,
+        stimulus_height: 200,
+        choices: CLASS_NAMES,
+        prompt: `<div class="trial-counter">Practice ${i+1}/5</div>`,
+        data: { task: 'practice', correct_class: stim.correct_class, condition: CONDITION },
+        css_classes: ['stimulus-img'],
+        on_finish: function(data) {
+            data.correct = parseInt(data.response) === data.correct_class;
+        }
+    });
+
+    timeline.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function() {
+            let last = jsPsych.data.get().last(1).values()[0];
+            let correct = last.correct;
+            let correctName = CLASS_NAMES[last.correct_class];
+            if (correct) {
+                return `<div class="feedback-correct">&#10004; Correct!</div>
+                        <div class="feedback-answer">It was: ${correctName}</div>`;
+            } else {
+                return `<div class="feedback-incorrect">&#10008; Incorrect</div>
+                        <div class="feedback-answer">Correct answer: ${correctName}</div>`;
+            }
+        },
+        choices: 'NO_KEYS',
+        trial_duration: FEEDBACK_DURATION,
+    });
+}
+
+// Start learning phase
+timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="instructions">
+        <h2>Learning Phase</h2>
+        <p>Now the real experiment begins. You will see ${N_LEARNING_TRIALS} phosphene patterns.</p>
+        <p>Try to learn which pattern goes with which category.</p>
+        <p>You will receive feedback after each response.</p>
+    </div>`,
+    choices: ['Begin Learning'],
+});
+
+// Learning trials
+for (let i = 0; i < N_LEARNING_TRIALS; i++) {
+    let stim = learningStimuli[i];
+    let progress = ((i + 1) / N_LEARNING_TRIALS * 100).toFixed(0);
+
+    timeline.push({
+        type: jsPsychImageButtonResponse,
+        stimulus: stim.stimulus,
+        stimulus_width: 200,
+        stimulus_height: 200,
+        choices: CLASS_NAMES,
+        prompt: `<div class="trial-counter">Learning: Trial ${i+1}/${N_LEARNING_TRIALS}</div>
+                 <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`,
+        data: {
+            task: 'response',
+            phase: 'learning',
+            trial_num: i + 1,
+            correct_class: stim.correct_class,
+            correct_name: stim.correct_name,
+            condition: CONDITION,
+            participant: PARTICIPANT_ID,
+        },
+        on_finish: function(data) {
+            data.correct = parseInt(data.response) === data.correct_class;
+        }
+    });
+
+    // Feedback
+    timeline.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function() {
+            let last = jsPsych.data.get().last(1).values()[0];
+            let correct = last.correct;
+            let correctName = CLASS_NAMES[last.correct_class];
+            if (correct) {
+                return `<div class="feedback-correct">&#10004; Correct!</div>
+                        <div class="feedback-answer">${correctName}</div>`;
+            } else {
+                return `<div class="feedback-incorrect">&#10008; Incorrect</div>
+                        <div class="feedback-answer">Answer: ${correctName}</div>`;
+            }
+        },
+        choices: 'NO_KEYS',
+        trial_duration: FEEDBACK_DURATION,
+    });
+
+    // ITI
+    timeline.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<div style="font-size:30px;color:#ecf0f1">+</div>',
+        choices: 'NO_KEYS',
+        trial_duration: ITI_DURATION,
+    });
+
+    // Break every 50 trials
+    if ((i + 1) % 50 === 0 && i + 1 < N_LEARNING_TRIALS) {
+        let blockAcc = jsPsych.data.get().filter({task: 'response', phase: 'learning'}).last(50);
+        timeline.push({
+            type: jsPsychHtmlButtonResponse,
+            stimulus: function() {
+                let recent = jsPsych.data.get().filter({task: 'response', phase: 'learning'}).last(50);
+                let acc = (recent.filter({correct: true}).count() / 50 * 100).toFixed(0);
+                return `<div class="instructions">
+                    <h2>Break</h2>
+                    <p>You've completed ${i+1}/${N_LEARNING_TRIALS} learning trials.</p>
+                    <p>Your accuracy in the last 50 trials: <strong>${acc}%</strong></p>
+                    <p>Take a short rest if needed, then continue.</p>
+                </div>`;
+            },
+            choices: ['Continue'],
+        });
+    }
+}
+
+// Test phase instructions
+timeline.push({
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div class="instructions">
+        <h2>Test Phase</h2>
+        <p>Well done! Now let's test what you've learned.</p>
+        <p>You will see <strong>${N_TEST_TRIALS} more patterns</strong>, but this time
+        <strong>without feedback</strong>.</p>
+        <p>Just do your best based on what you learned.</p>
+    </div>`,
+    choices: ['Begin Test'],
+});
+
+// Test trials (no feedback)
+for (let i = 0; i < N_TEST_TRIALS; i++) {
+    let stim = testStimuli[i];
+
+    timeline.push({
+        type: jsPsychImageButtonResponse,
+        stimulus: stim.stimulus,
+        stimulus_width: 200,
+        stimulus_height: 200,
+        choices: CLASS_NAMES,
+        prompt: `<div class="trial-counter">Test: ${i+1}/${N_TEST_TRIALS}</div>`,
+        data: {
+            task: 'response',
+            phase: 'test',
+            trial_num: i + 1,
+            correct_class: stim.correct_class,
+            correct_name: stim.correct_name,
+            condition: CONDITION,
+            participant: PARTICIPANT_ID,
+        },
+        on_finish: function(data) {
+            data.correct = parseInt(data.response) === data.correct_class;
+        }
+    });
+
+    // ITI only (no feedback)
+    timeline.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<div style="font-size:30px;color:#ecf0f1">+</div>',
+        choices: 'NO_KEYS',
+        trial_duration: ITI_DURATION,
+    });
+}
+
+// Subjective rating
+timeline.push({
+    type: jsPsychSurveyLikert,
+    questions: [
+        {
+            prompt: 'How difficult was it to learn the phosphene patterns?',
+            labels: ['Very Easy', 'Easy', 'Moderate', 'Difficult', 'Very Difficult'],
+            required: true, name: 'difficulty'
+        },
+        {
+            prompt: 'How confident are you in your test phase answers?',
+            labels: ['Not at all', 'Slightly', 'Moderately', 'Very', 'Extremely'],
+            required: true, name: 'confidence'
+        },
+        {
+            prompt: 'Did you notice any strategy that helped you learn?',
+            labels: ['No strategy', 'Somewhat', 'Yes, clear strategy'],
+            required: true, name: 'strategy'
+        }
+    ],
+    data: { task: 'survey', condition: CONDITION, participant: PARTICIPANT_ID },
+});
+
+// Run
+jsPsych.run(timeline);
+</script>
+</body>
+</html>

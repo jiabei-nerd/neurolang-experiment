@@ -1,0 +1,4 @@
+data/
+collected_data/
+*.pyc
+__pycache__/

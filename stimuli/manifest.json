@@ -1,0 +1,2020 @@
+{
+  "classes": {
+    "0": "clear_path",
+    "1": "obstacle",
+    "2": "person_left",
+    "3": "person_right",
+    "4": "vehicle_ahead",
+    "5": "vehicle_side",
+    "6": "crosswalk",
+    "7": "bicycle"
+  },
+  "n_classes": 8,
+  "samples_per_class": 25,
+  "stimuli": {
+    "symbol": [
+      {
+        "file": "symbol/class0_sample0.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample1.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample2.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample3.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample4.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample5.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample6.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample7.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample8.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample9.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample10.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample11.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample12.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample13.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample14.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample15.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample16.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample17.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample18.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample19.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample20.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample21.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample22.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample23.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class0_sample24.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "symbol/class1_sample0.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample1.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample2.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample3.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample4.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample5.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample6.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample7.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample8.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample9.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample10.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample11.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample12.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample13.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample14.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample15.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample16.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample17.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample18.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample19.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample20.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample21.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample22.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample23.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class1_sample24.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "symbol/class2_sample0.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample1.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample2.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample3.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample4.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample5.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample6.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample7.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample8.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample9.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample10.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample11.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample12.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample13.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample14.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample15.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample16.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample17.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample18.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample19.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample20.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample21.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample22.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample23.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class2_sample24.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "symbol/class3_sample0.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample1.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample2.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample3.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample4.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample5.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample6.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample7.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample8.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample9.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample10.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample11.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample12.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample13.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample14.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample15.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample16.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample17.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample18.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample19.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample20.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample21.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample22.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample23.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class3_sample24.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "symbol/class4_sample0.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample1.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample2.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample3.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample4.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample5.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample6.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample7.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample8.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample9.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample10.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample11.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample12.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample13.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample14.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample15.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample16.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample17.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample18.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample19.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample20.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample21.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample22.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample23.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class4_sample24.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "symbol/class5_sample0.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample1.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample2.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample3.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample4.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample5.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample6.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample7.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample8.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample9.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample10.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample11.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample12.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample13.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample14.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample15.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample16.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample17.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample18.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample19.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample20.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample21.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample22.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample23.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class5_sample24.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "symbol/class6_sample0.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample1.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample2.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample3.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample4.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample5.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample6.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample7.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample8.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample9.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample10.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample11.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample12.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample13.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample14.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample15.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample16.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample17.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample18.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample19.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample20.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample21.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample22.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample23.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class6_sample24.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "symbol/class7_sample0.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample1.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample2.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample3.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample4.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample5.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample6.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample7.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample8.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample9.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample10.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample11.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample12.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample13.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample14.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample15.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample16.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample17.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample18.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample19.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample20.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample21.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample22.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample23.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "symbol/class7_sample24.png",
+        "class": 7,
+        "class_name": "bicycle"
+      }
+    ],
+    "pixel": [
+      {
+        "file": "pixel/class0_sample0.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample1.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample2.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample3.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample4.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample5.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample6.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample7.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample8.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample9.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample10.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample11.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample12.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample13.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample14.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample15.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample16.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample17.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample18.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample19.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample20.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample21.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample22.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample23.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class0_sample24.png",
+        "class": 0,
+        "class_name": "clear_path"
+      },
+      {
+        "file": "pixel/class1_sample0.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample1.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample2.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample3.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample4.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample5.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample6.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample7.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample8.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample9.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample10.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample11.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample12.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample13.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample14.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample15.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample16.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample17.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample18.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample19.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample20.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample21.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample22.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample23.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class1_sample24.png",
+        "class": 1,
+        "class_name": "obstacle"
+      },
+      {
+        "file": "pixel/class2_sample0.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample1.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample2.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample3.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample4.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample5.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample6.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample7.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample8.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample9.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample10.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample11.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample12.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample13.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample14.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample15.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample16.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample17.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample18.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample19.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample20.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample21.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample22.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample23.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class2_sample24.png",
+        "class": 2,
+        "class_name": "person_left"
+      },
+      {
+        "file": "pixel/class3_sample0.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample1.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample2.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample3.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample4.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample5.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample6.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample7.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample8.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample9.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample10.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample11.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample12.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample13.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample14.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample15.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample16.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample17.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample18.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample19.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample20.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample21.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample22.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample23.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class3_sample24.png",
+        "class": 3,
+        "class_name": "person_right"
+      },
+      {
+        "file": "pixel/class4_sample0.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample1.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample2.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample3.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample4.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample5.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample6.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample7.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample8.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample9.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample10.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample11.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample12.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample13.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample14.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample15.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample16.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample17.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample18.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample19.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample20.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample21.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample22.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample23.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class4_sample24.png",
+        "class": 4,
+        "class_name": "vehicle_ahead"
+      },
+      {
+        "file": "pixel/class5_sample0.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample1.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample2.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample3.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample4.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample5.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample6.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample7.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample8.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample9.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample10.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample11.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample12.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample13.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample14.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample15.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample16.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample17.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample18.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample19.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample20.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample21.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample22.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample23.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class5_sample24.png",
+        "class": 5,
+        "class_name": "vehicle_side"
+      },
+      {
+        "file": "pixel/class6_sample0.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample1.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample2.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample3.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample4.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample5.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample6.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample7.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample8.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample9.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample10.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample11.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample12.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample13.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample14.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample15.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample16.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample17.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample18.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample19.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample20.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample21.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample22.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample23.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class6_sample24.png",
+        "class": 6,
+        "class_name": "crosswalk"
+      },
+      {
+        "file": "pixel/class7_sample0.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample1.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample2.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample3.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample4.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample5.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample6.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample7.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample8.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample9.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample10.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample11.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample12.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample13.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample14.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample15.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample16.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample17.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample18.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample19.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample20.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample21.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample22.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample23.png",
+        "class": 7,
+        "class_name": "bicycle"
+      },
+      {
+        "file": "pixel/class7_sample24.png",
+        "class": 7,
+        "class_name": "bicycle"
+      }
+    ]
+  }
+}
